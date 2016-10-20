@@ -76,14 +76,16 @@
 				    fetch(req).then(function(response) {  
 				    		//  typeof(response.body)==ReadableStream
 				        var reader = response.body.getReader();  
-//				        _this._reader=reader;
+				        _this._reader=reader;
 				        return _this.readr(reader);
 				    })
 				    _this.firstRun=true;
 			   	}
 				else
 				{
-					_reader.cancel();
+					_this._reader.cancel();
+					 _this.firstRun=false;
+					 _this.sourceOpen();
 				}
 		},
 		//解析tags数组
@@ -571,6 +573,7 @@
 		}
 	}
 	function detail(ss_str){
+		console.log(table._dic[ss_str].join("  "))
 		document.getElementById("detailTxt").innerHTML=(table._dic[ss_str].join("  "))
 	}
 	window.detail=detail;
