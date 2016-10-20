@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<!--
+                  	作者：332065255@qq.com
+                  	时间：2016-10-20
+                  	描述：flv直播分析工具
+                  -->
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>实时监控FLV直播流,详细分析flv文件</title>
+		<link rel="stylesheet" href="css/flv.css" />
+		<link rel="stylesheet" href="css/bootstrap.min.css" />
+		<style>
+		</style>
+		<script type="text/javascript" src="js/LiveFlvParse.js" ></script>
+		<script>
+			function begin(){
+				Live.init(document.getElementById("exampleInputEmail1").value,"resultTables");
+			}
+		</script>
+	</head>
+	<body>
+		<div class="row main">
+		  <div class="col-md-9 left">
+		  	<!--左边-->
+		  	<div class="userEdit">
+		  		<!--用户操作区
+                  -->
+			  	<div class="form-group">
+				    <label for="exampleInputEmail1">请输入Flv直播地址    <mark>FLV直播地址需要跨域,请在flv地址之前加https://cors-anywhere.herokuapp.com/</mark></label>
+				    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="https://cors-anywhere.herokuapp.com/http://123.com/1.flv" value="https://cors-anywhere.herokuapp.com/http://dvr-ws.csslcloud.net/src/AE3C4B5BCABAA3AE9C33DC5901307461.flv">
+				 </div>
+				 <button type="submit" class="btn btn-default" onclick="begin()">开始分析</button>
+			 </div>
+			 <div class="resultTable">
+			 	<!--<table class="table table-bordered" id="">
+			 		<tr>
+			 			<td>#</td>
+			 			<td>类型</td>
+			 			<td>时间戳</td>
+			 			<td>编码</td>
+			 			<td>帧类型</td>
+			 			<td>帧大小</td>
+			 			<td>详情</td>
+			 		</tr>
+			 	</table>-->
+			 	<table class="table table-bordered" id="resultTables">
+				 	<!--<tr class="active"><td>1</td></tr>
+					<tr class="success"><td>1</td></tr>
+					<tr class="warning"><td>1</td></tr>
+					<tr class="danger"><td>1</td></tr>
+					<tr class="info"><td>1</td></tr>-->
+				</table>
+
+			 </div>
+		  </div>
+		  <div class="col-md-3 right" id="detailTxt">
+		  	<!--右边-->
+		  	
+		  </div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,39 @@
+*{
+				padding: 0px;
+				margin: 0px;
+}
+.left{
+		/*background-color: #E3E3E3;*/
+		height: 100%;
+				
+}
+.right{
+		background-color: #BCE8F1;	
+		height: 100%;
+		overflow-y: scroll;
+}
+.main{
+	width: 100%;
+	height: 100%;
+}
+html,body{
+	width: 100%;
+	height: 100%;
+}
+.userEdit{
+	height: 20%;
+}
+.resultTable{
+	height: 80%;
+	overflow-y: scroll;
+	overflow-x: hidden;
+}
+.danger2{
+	background-color: #CE8483;
+}
+.active2{
+	background-color: #C0C0C0;
+}
+.success2{
+	background-color: #5BC0DE;
+}
