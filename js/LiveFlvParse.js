@@ -231,48 +231,7 @@
             			{
             				_this.arrMetaTag.shift();
             				_this.parseTags(_this.arrMetaTag);
-//          				var arrT=[];
-//          				for(var i=0;i<_this.arrMetaTag.length;i++)
-//          				{
-//          					arrT=arrT.concat(_this.arrMetaTag[i]);
-//          				}
-//          				let parser = new InitSegmentParser();
-//          				
-//          				let flvhdr=parser.push(new Uint8Array(arrT))
-////          				console.log(flvhdr);
-//          				let stream=flvhdr
-//          				stream.duration = stream.meta.duration;
-//          				stream.duration=stream.duration==0?3600:stream.duration;
-//          				stream.timeStart = 0;
-//						stream.timeEnd = stream.duration;
-//          				
-//          				let record = flvhdr.firstv.AVCDecoderConfigurationRecord;
-//						console.log('probe:', `h264.profile=${record[1].toString(16)}`, 'meta', flvhdr);
-//		
-//						this.videoTrack = {
-//							type: 'video',
-//							id: 1,
-//							duration: 0,
-//							width: flvhdr.meta.width,
-//							height: flvhdr.meta.height,
-//							AVCDecoderConfigurationRecord: flvhdr.firstv.AVCDecoderConfigurationRecord,
-//						};
-//						_this.videoTrackF=videoTrack;
-//						this.audioTrack = {
-//							type: 'audio',
-//							id: 2,
-//							duration: this.videoTrack.duration,
-//							channelcount: flvhdr.firsta.channelCount,
-//							samplerate: flvhdr.firsta.sampleRate,
-//							samplesize: flvhdr.firsta.sampleSize,
-//							AudioSpecificConfig: flvhdr.firsta.AudioSpecificConfig,
-//						};
-//						table.addTr(flvhdr.meta);
-//						table.addTr(flvhdr.firstv);
-//						table.addTr(flvhdr.firsta);
-            				
             				_this.fristMoovSet=true;
-//          				reader.cancel();
             			}
             			else if(_this.fristMoovSet&&_this.arrTag.length>0)
             			{
