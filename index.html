@@ -14,8 +14,18 @@
 		</style>
 		<script type="text/javascript" src="js/LiveFlvParse.js" ></script>
 		<script>
+			var frist=false;
 			function begin(){
-				Live.init(document.getElementById("exampleInputEmail1").value,"resultTables");
+				if(!frist)
+				{
+					frist=true;
+					Live.init(document.getElementById("exampleInputEmail1").value,"resultTables");
+					document.getElementById("button1").innerHTML="刷新";
+				}
+				else
+				{
+					window.location.reload(); 
+				}
 			}
 		</script>
 	</head>
@@ -30,7 +40,7 @@
 				    <label for="exampleInputEmail1">请输入Flv直播地址    <mark>FLV直播地址需要跨域,请在flv地址之前加https://cors-anywhere.herokuapp.com/</mark></label>
 				    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="https://cors-anywhere.herokuapp.com/http://123.com/1.flv" value="https://cors-anywhere.herokuapp.com/http://dvr-ws.csslcloud.net/src/AE3C4B5BCABAA3AE9C33DC5901307461.flv">
 				 </div>
-				 <button type="submit" class="btn btn-default" onclick="begin()">开始分析</button>
+				 <button type="submit" class="btn btn-default" onclick="begin()" id="button1">开始分析</button>
 			 </div>
 			 <div class="resultTable">
 			 	<!--<table class="table table-bordered" id="">
