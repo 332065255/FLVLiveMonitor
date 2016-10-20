@@ -13,6 +13,12 @@
 			this._videoid=tableID;
 			mediaSourceEx.init(this._liveSrc);
 			table.init(tableID);
+		},
+		stop:function(){
+			if(mediaSourceEx._reader2)
+			{
+				mediaSourceEx._reader2.cancel();
+			}
 		}
 	};
 	//主要播放库
@@ -76,14 +82,14 @@
 				    fetch(req).then(function(response) {  
 				    		//  typeof(response.body)==ReadableStream
 				        var reader = response.body.getReader();  
-				        _this._reader=reader;
+				        _this._reader2=reader;
 				        return _this.readr(reader);
 				    })
 				    _this.firstRun=true;
 			   	}
 				else
 				{
-					_this._reader.cancel();
+					_this._reader2.cancel();
 					 _this.firstRun=false;
 					 _this.sourceOpen();
 				}

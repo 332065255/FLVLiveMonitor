@@ -27,6 +27,9 @@
 					window.location.reload(); 
 				}
 			}
+			function stop(){
+				Live.stop();
+			}
 		</script>
 	</head>
 	<body>
@@ -41,6 +44,7 @@
 				    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="https://cors-anywhere.herokuapp.com/http://123.com/1.flv" value="https://cors-anywhere.herokuapp.com/http://dvr-ws.csslcloud.net/src/AE3C4B5BCABAA3AE9C33DC5901307461.flv">
 				 </div>
 				 <button type="submit" class="btn btn-default" onclick="begin()" id="button1">开始分析</button>
+				 <button type="submit" class="btn btn-default" onclick="stop()" id="button1">停止分析</button>
 			 </div>
 			 <div class="resultTable">
 			 	<!--<table class="table table-bordered" id="">
