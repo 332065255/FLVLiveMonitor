@@ -539,7 +539,67 @@
 	}
 	function detail(ss_str){
 		console.log(table._dic[ss_str].join("  "))
-		document.getElementById("detailTxt").innerHTML=(table._dic[ss_str].join("  "))
+		document.getElementById("detailTxt").innerHTML=(getDetail(table._dic[ss_str]))
+	}
+	function getDetail(arr){
+		var str="";
+		var temp="";
+		for(var i=0;i<arr.length;i++)
+		{
+			var tes=arr[i].toString(16);
+			switch(i)
+			{
+				case 0:
+					str+="<div>Tags类型:&nbsp<abbr title='tags类型'>"+tes+"</abbr></div>"
+					break;
+				case 1:
+				case 2:
+				case 3:
+					temp=temp+tes+" "
+					if(i==3)
+					{
+						str+="<div>body大小:&nbsp<abbr title='body大小'>"+temp+"</abbr></div>"
+						temp="";
+					}
+					break;
+				case 4:
+				case 5:
+				case 6:
+				case 7:
+					temp=temp+tes+" "
+					if(i==7)
+					{
+						str+="<div>时间戳及扩展时间戳:&nbsp<abbr title='时间戳及扩展时间戳'>"+temp+"</abbr></div>"
+						temp="";
+					}
+					
+					break;
+				case 8:
+				case 9:
+				case 10:
+					temp=temp+tes+" "
+					if(i==10)
+					{
+						str+="<div>StreamID:&nbsp<abbr title='streamID'>"+temp+"</abbr></div>"
+						temp="";
+					}
+					break;
+				default:
+					temp=temp+tes+" ";
+					if(i==(arr.length-5))
+					{
+						str+="<div>Body:&nbsp<abbr title='包体'>"+temp+"</abbr></div>"
+						temp="";
+					}
+					if(i==(arr.length-1))
+					{
+						str+="<div>整个tag大小:&nbsp<abbr title='tag大小'>"+temp+"</abbr></div>"
+						temp="";
+					}
+					break;
+			}
+		}
+		return str;
 	}
 	window.detail=detail;
 	window.Live=Live;
