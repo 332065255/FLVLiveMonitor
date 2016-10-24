@@ -3,7 +3,7 @@
 
 #### [线上示例(demo)](http://gao11.cn/flvMonitor/index.html) 
 ###### 有兴趣者可以联系我邮箱332065255@qq.com互相探讨
-![screenshot](http://gao11.cn/img/2.jpg)
+![screenshot](http://gao111.top/img/2.jpg)
 -----------------------------------------
 ### 第一次更新
 		* 后续增强右面详情界面功能
