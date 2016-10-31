@@ -515,7 +515,10 @@
 				tr.className="active2"
 				break;
 				case "video":
+				if(obj.tagType=="KeyFrame")
 				tr.className="success2"
+				else
+				tr.className="success3"
 				break;
 				case "audio":
 				tr.className="info2"
