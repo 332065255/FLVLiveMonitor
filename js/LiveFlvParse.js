@@ -493,8 +493,8 @@
 		_dic:{},
 		init:function(id){
 			_thisT=this;
-			_thisT._table=document.getElementById(id)
-			_thisT._table.appendChild(_thisT.title());
+//			_thisT._table=document.getElementById(id)
+//			_thisT._table.appendChild(_thisT.title());
 		},
 		title:function(){
 			var tr=document.createElement("tr");
@@ -509,35 +509,38 @@
 			return tr;
 		},
 		addTr:function(obj){
-			var tr=document.createElement("tr");
-			switch(obj.type){
-				case "script":
-				tr.className="active2"
-				break;
-				case "video":
-				if(obj.tagType=="KeyFrame")
-				tr.className="success2"
-				else
-				tr.className="success3"
-				break;
-				case "audio":
-				tr.className="info2"
-				break;
-			}
+//			var tr=document.createElement("tr");
+//			switch(obj.type){
+//				case "script":
+//				tr.className="active2"
+//				break;
+//				case "video":
+//				if(obj.tagType=="KeyFrame")
+//				tr.className="success2"
+//				else
+//				tr.className="success3"
+//				break;
+//				case "audio":
+//				tr.className="info2"
+//				break;
+//			}
 			var bos=obj.bodys;
 			var s=bos;
-			_thisT._dic[obj.id]=s;
-			tr.innerHTML="<td>"+obj.id+"</td>"
-						+"<td>"+obj.type+"</td>"
-						+"<td>"+obj.time+"</td>"
-						+"<td>"+obj.ecode+"</td>"
-						+"<td>"+obj.tagType+"</td>"
-						+"<td>"+obj.bodys.length+"</td>"
-						+"<td><button value='详情' onClick='window.detail("+obj.id+")'>详情</button></td>";
-			_thisT._table.appendChild(tr);
+			_thisT._dic[obj.id-1]=s;
+//			tr.innerHTML="<td>"+obj.id+"</td>"
+//						+"<td>"+obj.type+"</td>"
+//						+"<td>"+obj.time+"</td>"
+//						+"<td>"+obj.ecode+"</td>"
+//						+"<td>"+obj.tagType+"</td>"
+//						+"<td>"+obj.bodys.length+"</td>"
+//						+"<td><button value='详情' onClick='window.detail("+obj.id+")'>详情</button></td>";
+//			_thisT._table.appendChild(tr);
+			
+			v_table.addDetail(obj.type,obj.time,obj.ecode,obj.tagType,obj.bodys.length)
 		},
 		clear:function(){
-			_thisT._table.innerHTML="";
+//			_thisT._table.innerHTML="";
+			v_table.details=[];
 		}
 	}
 	function detail(ss_str){
@@ -603,6 +606,23 @@
 			}
 		}
 		return str;
+	}
+	var v_table=null;
+	window.onload=function(){
+		v_table=new Vue({
+			el:"#detailTable",
+			data:{
+				details:[],
+			},
+			methods:{
+				addDetail:function(type,time,code,keyType,frameSize){
+					this.details.push({type:type,time:time,code:code,keytype:keyType,framesize:frameSize})
+				},
+				getDetail:function(index){
+					detail(index);
+				}
+			}
+		})
 	}
 	window.detail=detail;
 	window.Live=Live;

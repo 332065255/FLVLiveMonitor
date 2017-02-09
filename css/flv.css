@@ -30,13 +30,17 @@ html,body{
 }
 .danger2{
 	background-color: #CE8483;
+	height: 20px;
 }
 .active2{
 	background-color: #C0C0C0;
+	height: 20px;
 }
 .success2{
 	background-color: #5BC0DE;
+	height: 20px;
 }
 .success3{
-	background-color: #C9E2B3
+	background-color: #C9E2B3;
+	height: 20px;
 }

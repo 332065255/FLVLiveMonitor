@@ -12,7 +12,9 @@
 		<link rel="stylesheet" href="css/bootstrap.min.css" />
 		<style>
 		</style>
+		<script type="text/javascript" src="js/vue.js" ></script>
 		<script type="text/javascript" src="js/LiveFlvParse.js" ></script>
+		
 		<script>
 			var frist=false;
 			function begin(){
@@ -46,7 +48,29 @@
 				 <button type="submit" class="btn btn-default" onclick="begin()" id="button1">开始分析</button>
 				 <button type="submit" class="btn btn-default" onclick="stop()" id="button1">停止分析</button>
 			 </div>
-			 <div class="resultTable">
+			 <!--<div class="resultTable">-->
+			 	<!--<table class="table table-bordered" id="">
+			 		<tr>
+			 			<td>#</td>
+			 			<td>类型</td>
+			 			<td>时间戳</td>
+			 			<td>编码</td>
+			 			<td>帧类型</td>
+			 			<td>帧大小</td>
+			 			<td>详情</td>
+			 		</tr>
+			 	</table>-->
+			 	<!--<table class="table table-bordered" id="resultTables">-->
+				 	<!--<tr class="active"><td>1</td></tr>
+					<tr class="success"><td>1</td></tr>
+					<tr class="warning"><td>1</td></tr>
+					<tr class="danger"><td>1</td></tr>
+					<tr class="info"><td>1</td></tr>-->
+				<!--</table>-->
+
+			 <!--</div>-->
+			 
+			 <div class="resultTable" id="detailTable">
 			 	<!--<table class="table table-bordered" id="">
 			 		<tr>
 			 			<td>#</td>
@@ -59,14 +83,32 @@
 			 		</tr>
 			 	</table>-->
 			 	<table class="table table-bordered" id="resultTables">
-				 	<!--<tr class="active"><td>1</td></tr>
-					<tr class="success"><td>1</td></tr>
-					<tr class="warning"><td>1</td></tr>
-					<tr class="danger"><td>1</td></tr>
-					<tr class="info"><td>1</td></tr>-->
+				 	<thead>
+				 		<tr>
+				 			<td>#</td>
+				 			<td>类型</td>
+				 			<td>时间戳</td>
+				 			<td>编码</td>
+				 			<td>帧类型</td>
+				 			<td>帧大小</td>
+				 			<td>详情</td>
+				 		</tr>
+				 	</thead>
+				 	<tbody>
+				 		<tr v-for="(detail,index) in details" :class="[detail.type=='video'?(detail.keytype=='KeyFrame'?'success2':'success3'):(detail.type=='script'?'active2':'info2')]">
+				 			<td>{{index}}</td>
+				 			<td>{{detail.type}}</td>
+				 			<td>{{detail.time}}</td>
+				 			<td>{{detail.code}}</td>
+				 			<td>{{detail.keytype}}</td>
+				 			<td>{{detail.framesize}}</td>
+				 			<td><button v-on:click='getDetail(index)'>详情</button></td>
+				 		</tr>
+				 	</tbody>
 				</table>
 
 			 </div>
+			 
 		  </div>
 		  <div class="col-md-3 right" id="detailTxt">
 		  	
