@@ -95,7 +95,8 @@
 				 		</tr>
 				 	</thead>
 				 	<tbody>
-				 		<tr v-for="(detail,index) in details" :class="[detail.type=='video'?(detail.keytype=='KeyFrame'?'success2':'success3'):(detail.type=='script'?'active2':'info2')]">
+				 		<!--<tr v-for="(detail,index) in details" :class="[detail.type=='video'?(detail.keytype=='KeyFrame'?'success2':'success3'):(detail.type=='script'?'active2':'info2')]">-->
+				 			<tr v-for="(detail,index) in details" :class="getTrClass(index)">
 				 			<td>{{index}}</td>
 				 			<td>{{detail.type}}</td>
 				 			<td>{{detail.time}}</td>

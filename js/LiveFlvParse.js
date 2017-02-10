@@ -620,7 +620,14 @@
 				},
 				getDetail:function(index){
 					detail(index);
+				},
+				getTrClass:function(id){
+					var detail=this.details[id];
+					return detail.type=='video'?(detail.keytype=='KeyFrame'?'success2':'success3'):(detail.type=='script'?'active2':'info2')
 				}
+			},
+			computed:{
+				
 			}
 		})
 	}
