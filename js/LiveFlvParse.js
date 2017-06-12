@@ -251,6 +251,26 @@
             			return _this.readr(reader);
             	})
 			},
+			
+			locParse:function(u8ass){
+				_this=mediaSourceEx;
+				mediaSourceEx.Progresss(u8ass);
+            			if(mediaSourceEx.arrMetaTag.length>3&&!mediaSourceEx.fristMoovSet)
+            			{
+            				mediaSourceEx.arrMetaTag.shift();
+            				mediaSourceEx.parseTags(mediaSourceEx.arrMetaTag);
+            				mediaSourceEx.fristMoovSet=true;
+            			}
+            			else if(mediaSourceEx.fristMoovSet&&mediaSourceEx.arrTag.length>0)
+            			{
+//          				_this.testIndex+=1;
+            				
+//          				let segpkts = parseMediaSegment(new Uint8Array(_this.arrTag));
+            				mediaSourceEx.parseTags(mediaSourceEx.arrTag);
+            				mediaSourceEx.arrTag.length=0;
+            			}	
+			},
+			
 			sourceBufferOnUpdateend:function(){
 				if(_this.arr.length>0)
 				{
@@ -619,7 +639,12 @@
 					this.details.push({type:type,time:time,code:code,keytype:keyType,framesize:frameSize})
 				},
 				getDetail:function(index){
-					detail(index);
+					if(mediaSourceEx._this==null){
+						window.showDetail(index);
+					}else{
+						detail(index);
+					}
+					
 				},
 				getTrClass:function(id){
 					var detail=this.details[id];
@@ -630,7 +655,12 @@
 				
 			}
 		})
+		window.v_table=v_table;
 	}
 	window.detail=detail;
 	window.Live=Live;
+	window.locParse=mediaSourceEx.locParse;
+	window.showDetail=function(index){
+		document.getElementById("detailTxt").innerHTML=(getDetail(Tagarr[index].bodys2))
+	}
 })()

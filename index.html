@@ -14,6 +14,7 @@
 		</style>
 		<script type="text/javascript" src="js/vue.js" ></script>
 		<script type="text/javascript" src="js/LiveFlvParse.js" ></script>
+		<script type="text/javascript" src="js/bound.js" ></script>
 		
 		<script>
 			var frist=false;
@@ -32,6 +33,8 @@
 			function stop(){
 				Live.stop();
 			}
+			
+			
 		</script>
 	</head>
 	<body>
@@ -118,4 +121,174 @@
 		  </div>
 		</div>
 	</body>
+	<script>
+		var dropbox=document.querySelector('body');
+		dropbox.addEventListener("dragover", function(e) {
+            e.stopPropagation();
+            e.preventDefault();
+        }, false);
+        dropbox.addEventListener("drop", function(e) {
+            e.stopPropagation();
+            e.preventDefault();
+            var reader = new FileReader();
+            reader.addEventListener("load", processflv, false);
+            reader.readAsArrayBuffer(e.dataTransfer.files[0]);
+        }, false);
+
+        function processflv(e) {
+            var buffer = e.target.result;
+            var uint8 = new Uint8Array(buffer);
+            //将拖拽入的flv视频转成了2进制数组
+            window.Tagarr=(flvParse.setLocFlv(uint8))//仍入转换器
+//          for(var ins=0;ins<arr.length;i++){
+//          		v_table.addDetail(arr[i].tagType,arr[i].getTime(),"xxx",)
+//          }
+			parseTags(Tagarr);
+            // var flv2mp4 = new flv2fmp4();
+            // flv2mp4.setflv(buffer);
+            // flv2mp4.onInitSegment = onInitSegment.bind(_this);
+            // flv2mp4.onMediaSegment = onMediaSegment.bind(_this);
+        }
+        function addArr(uint8,arr){
+        		for(var i=0;i<uint8.length;i++){
+        			arr.push(uint8[i]);
+        		}
+        }
+        function parseTags(arr){
+			
+			for(var i=0;i<(arr.length>100?100:arr.length);i++)
+			{
+				var tag={};
+				var bodys=[];
+				bodys.push(arr[i].tagType);
+				addArr(arr[i].Timestamp,bodys);
+				addArr(arr[i].dataSize,bodys);
+				addArr(arr[i].StreamID,bodys);
+				addArr(arr[i].body,bodys);
+				tag.bodys=bodys;
+				arr[i].bodys2=bodys;
+//				_this.testIndex+=1;
+				tag.id=i;
+				switch(arr[i].tagType) ///解析标签类型
+				{
+					case parseInt("8",16):
+						tag.type="audio";
+						break;
+					case parseInt("9",16):
+						tag.type="video";
+						break;
+					case parseInt("12",16):
+						tag.type="script";
+						break;
+				}
+				tag.time=arr[i].getTime();
+				if(tag.type!="script")
+				{
+					if(tag.type=="video")
+					{
+//						var te=<<4
+						switch(arr[i].body[0]&0x0f)
+						{
+							case 1:
+							tag.ecode="JPEG";
+							break;
+							case 2:
+							tag.ecode="H.263";
+							break;
+							case 3:
+							tag.ecode="Screenvideo";
+							break;
+							case 4:
+							tag.ecode="On2 VP6";
+							break;
+							case 5:
+							tag.ecode="On2 VP6 alpha";
+							break;
+							case 6:
+							tag.ecode="Screen video 2";
+							break;
+							case 7:
+							tag.ecode="AVC/H264";
+							break;
+						}
+					}
+					else
+					{
+						switch(arr[i].body[0]>>4)
+						{
+							case 0:
+								tag.ecode="Linear PCM";
+								break;
+								case 1:
+									tag.ecode="ADPCM";
+								break;
+								case 2:
+									tag.ecode="MP3";
+								break;
+								case 3:
+									tag.ecode="linear PCM,little";
+								break;
+								case 4:
+									tag.ecode="Nelly 16-khz";
+								break;
+								case 5:
+									tag.ecode="Nelly 8-kHz";
+								break;
+								case 6:
+									tag.ecode="Nellymoser";
+								break;
+								case 7:
+									tag.ecode="G.711 A-law";
+								break;
+								case 8:
+									tag.ecode="G.711 mu-law";
+								break;
+								case 9:
+									tag.ecode="reserved";
+								break;
+								case 10:
+									tag.ecode="AAC";
+								break;
+								case 14:
+									tag.ecode="MP3 8-khz";
+								break;
+								case 15:
+									tag.ecode="Device-specific";
+								break;
+						}
+					}
+				}
+				else{
+					tag.ecode="-";
+				}
+				if(tag.type=="video")
+				{
+					switch(arr[i].body[0]>>4)
+					{
+						case 1:
+							tag.tagType="KeyFrame";
+						break;
+						case 2:
+							tag.tagType="InterFrame";
+						break;
+						case 3:
+							tag.tagType="disposaIframe";
+						break;
+						case 4:
+							tag.tagType="gener Keyframe";
+						break;
+						case 5:
+							tag.tagType="videoinfo";
+						break;
+					}
+				}
+				else{
+					tag.tagType="-";
+				}
+//				table.addTr(tag);
+				v_table.addDetail(tag.type,tag.time,tag.ecode,tag.tagType,tag.bodys.length)
+			}
+		}
+        
+	</script>
 </html>
