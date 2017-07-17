@@ -78,7 +78,7 @@
 				if(!_this.firstRun)
 				{
 					
-					var req = new Request(_this._liveSrc, {method: 'GET', cache: 'default',mode:"cors"});  
+					var req = new Request(_this._liveSrc, {method: 'GET', cache: 'default',mode:"cors",header:new Headers()});  
 				    fetch(req).then(function(response) {  
 				    		//  typeof(response.body)==ReadableStream
 				        var reader = response.body.getReader();  
@@ -567,6 +567,70 @@
 		console.log(table._dic[ss_str].join("  "))
 		document.getElementById("detailTxt").innerHTML=(getDetail(table._dic[ss_str]))
 	}
+	
+	function getDetail2(arr){
+		var str="";
+		var temp="";
+		for(var i=0;i<arr.length;i++)
+		{
+			var tes=arr[i].toString(16);
+			switch(i)
+			{
+				case 0:
+					str+="<div>Tags类型:&nbsp<abbr title='tags类型'>"+tes+"</abbr></div>"
+					break;
+				case 1:
+				case 2:
+				case 3:
+				case 4:
+					temp=temp+tes+" "
+					if(i==3)
+					{
+						str+="<div>时间戳:&nbsp<abbr title='时间戳'>"+temp+"</abbr></div>"
+						temp="";
+					}
+					break;
+				
+				case 5:
+				case 6:
+				case 7:
+					temp=temp+tes+" "
+					if(i==7)
+					{
+						str+="<div>body大小:&nbsp<abbr title='body大小'>"+temp+"</abbr></div>"
+						temp="";
+					}
+					
+					break;
+				case 8:
+				case 9:
+				case 10:
+					temp=temp+tes+" "
+					if(i==10)
+					{
+						str+="<div>StreamID:&nbsp<abbr title='streamID'>"+temp+"</abbr></div>"
+						temp="";
+					}
+					break;
+				default:
+					temp=temp+tes+" ";
+					if(i==(arr.length-5))
+					{
+						str+="<div>Body:&nbsp<abbr title='包体'>"+temp+"</abbr></div>"
+						temp="";
+					}
+					if(i==(arr.length-1))
+					{
+						str+="<div>整个tag大小:&nbsp<abbr title='tag大小'>"+temp+"</abbr></div>"
+						temp="";
+					}
+					break;
+			}
+		}
+		return str;
+	}
+	
+	
 	function getDetail(arr){
 		var str="";
 		var temp="";
@@ -661,6 +725,6 @@
 	window.Live=Live;
 	window.locParse=mediaSourceEx.locParse;
 	window.showDetail=function(index){
-		document.getElementById("detailTxt").innerHTML=(getDetail(Tagarr[index].bodys2))
+		document.getElementById("detailTxt").innerHTML=(getDetail2(Tagarr[index].bodys2))
 	}
 })()
